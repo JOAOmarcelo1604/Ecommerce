@@ -35,6 +35,7 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     public List<ClienteModel> recuperarTodos() {
+
         return (List<ClienteModel>) clienteDAO.findAll();
     }
 }

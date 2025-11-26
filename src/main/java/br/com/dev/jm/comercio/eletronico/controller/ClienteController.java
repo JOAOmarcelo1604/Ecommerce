@@ -17,6 +17,7 @@ public class ClienteController {
 
     @GetMapping("/clientes")
     public ResponseEntity<List<ClienteModel>> getAll(){
+
         return ResponseEntity.ok(cliServ.recuperarTodos());
     }
 
