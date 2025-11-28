@@ -7,6 +7,10 @@ import br.com.dev.jm.comercio.eletronico.model.ClienteModel;
 import br.com.dev.jm.comercio.eletronico.model.ProdutoModel;
 import br.com.dev.jm.comercio.eletronico.service.categoria.ICategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,9 +21,12 @@ public class ProdutoServiceImpl implements IProdutoService {
     @Autowired
     private ProdutoDAO dao;
 
+    private static final int PAGE_SIZE = 5;
+
     @Override
-    public List<ProdutoModel> recuperarTodos() {
-        return (List<ProdutoModel>) dao.findByOrderByNomeAsc();
+    public Page<ProdutoModel> recuperarTodos(int numPagina) {
+        Pageable page = PageRequest.of(numPagina-1, PAGE_SIZE);
+        return dao.findByOrderByNomeAsc(page);
     }
 
 

@@ -6,6 +6,7 @@ import br.com.dev.jm.comercio.eletronico.model.ProdutoModel;
 import br.com.dev.jm.comercio.eletronico.service.cliente.IClienteService;
 import br.com.dev.jm.comercio.eletronico.service.produto.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,9 @@ public class ControllerProduto {
     public IProdutoService service;
 
     @GetMapping("/produtos")
-    public ResponseEntity<List<ProdutoModel>> getAll(){
+    public ResponseEntity<Page<ProdutoModel>> getAll(@RequestParam(name="p", defaultValue = "1") int p){
 
-        return ResponseEntity.ok(service.recuperarTodos());
+        return ResponseEntity.ok(service.recuperarTodos(p));
     }
 
     @GetMapping("/produtos/{id}")
