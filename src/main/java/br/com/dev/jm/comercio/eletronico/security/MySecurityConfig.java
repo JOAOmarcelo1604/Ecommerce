@@ -21,6 +21,8 @@ public class MySecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/produtos").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/usuarios/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+
 
                         .anyRequest().authenticated()
 

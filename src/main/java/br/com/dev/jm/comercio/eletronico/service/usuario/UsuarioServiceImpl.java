@@ -3,6 +3,7 @@ package br.com.dev.jm.comercio.eletronico.service.usuario;
 import br.com.dev.jm.comercio.eletronico.dao.UsuarioDAO;
 import br.com.dev.jm.comercio.eletronico.model.UsuarioModel;
 import br.com.dev.jm.comercio.eletronico.security.ECToken;
+import br.com.dev.jm.comercio.eletronico.security.ECTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -30,7 +31,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public ECToken fazerLogin(String email, String senha) {
+    public ECToken fazerLogin(String login, String senha) {
+        UsuarioModel u = dao.findByLogin(login);
+        if ( u != null){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            if (encoder.matches(senha,  u.getSenha())){
+                return ECTokenUtil.generateToken(u);
+            }
+        }
         return null;
     }
 }

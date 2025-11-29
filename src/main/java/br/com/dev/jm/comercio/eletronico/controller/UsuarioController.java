@@ -1,6 +1,7 @@
 package br.com.dev.jm.comercio.eletronico.controller;
 
 import br.com.dev.jm.comercio.eletronico.model.UsuarioModel;
+import br.com.dev.jm.comercio.eletronico.security.ECToken;
 import br.com.dev.jm.comercio.eletronico.service.usuario.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,4 +32,14 @@ public class UsuarioController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<ECToken> login(@RequestBody UsuarioModel usuario) {
+        ECToken token = service.fazerLogin(usuario.getLogin(),  usuario.getSenha());
+        if (token != null) {
+            return ResponseEntity.ok(token);
+        }
+        return ResponseEntity.status(403).build();
+    }
+
 }
