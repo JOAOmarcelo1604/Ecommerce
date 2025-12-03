@@ -1,5 +1,6 @@
 package br.com.dev.jm.comercio.eletronico.service.pedido;
 
+import br.com.dev.jm.comercio.eletronico.dto.FaturamentoMensal;
 import br.com.dev.jm.comercio.eletronico.model.PedidoModel;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface IPedidoService {
     public List<PedidoModel> listarTodosPedidos();
     public PedidoModel recuperarPeloNumero(Integer numPedido);
     public List<PedidoModel> recuperarTodosStatus(Integer status);
+    public List<FaturamentoMensal> recuperarFaturamentoMensal(Integer ano);
 }

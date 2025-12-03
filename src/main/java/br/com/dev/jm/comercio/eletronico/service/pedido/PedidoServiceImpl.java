@@ -1,6 +1,7 @@
 package br.com.dev.jm.comercio.eletronico.service.pedido;
 
 import br.com.dev.jm.comercio.eletronico.dao.PedidoDAO;
+import br.com.dev.jm.comercio.eletronico.dto.FaturamentoMensal;
 import br.com.dev.jm.comercio.eletronico.model.ItemPedidoModel;
 import br.com.dev.jm.comercio.eletronico.model.PedidoModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,10 @@ public class PedidoServiceImpl implements IPedidoService{
     @Override
     public List<PedidoModel> recuperarTodosStatus(Integer status) {
         return dao.findAllByStatus(status);
+    }
+
+    @Override
+    public List<FaturamentoMensal> recuperarFaturamentoMensal(Integer ano) {
+        return dao.recuperarFaturamento(ano);
     }
 }
